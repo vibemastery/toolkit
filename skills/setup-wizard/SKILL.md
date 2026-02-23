@@ -26,6 +26,10 @@ Rules for the name:
 
 Store it as `PROJECT_NAME` — you'll use it throughout. Confirm the name before proceeding.
 
+Also ask: **"Where would you like to create the project? Just press Enter to use the default (`~/Projects`), or type a different path."**
+
+Store it as `PROJECTS_DIR` — default to `~/Projects` if they don't specify.
+
 Also ask: **"Will your project need user accounts — things like login, registration, or a user dashboard?"**
 
 - **Yes** → set `AUTH=true`
@@ -113,9 +117,9 @@ Continue to Step 3.
 
 *Tell the builder: "Now I'll create your actual Laravel project. This downloads the framework and sets everything up in a new folder."*
 
-Navigate to wherever they keep their projects (ask if unsure — default to `~/Projects` or `~/Sites`):
+Navigate to their chosen directory:
 ```bash
-mkdir -p ~/Projects && cd ~/Projects
+mkdir -p {{PROJECTS_DIR}} && cd {{PROJECTS_DIR}}
 ```
 
 Create the project — use the command that matches their choices:
@@ -155,6 +159,11 @@ php artisan make:filament-user
 It will ask for a name, email, and password — these are your login credentials for the panel.
 
 > "Your admin panel is ready at `/admin`. Log in with the credentials you just created."
+
+Then refresh Laravel Boost so it picks up all the newly installed packages:
+```bash
+php artisan boost:update
+```
 
 ---
 
@@ -220,13 +229,9 @@ For each failure, explain it in plain English — no raw error stack traces. If 
 
 *Tell the builder: "Everything is set up. Let's see your project running for the first time."*
 
-```bash
-npm run dev &
-```
+Open `https://{{PROJECT_NAME}}.test` in the browser. You should see the Laravel welcome page.
 
-Open `https://{{PROJECT_NAME}}.test` in the browser.
-
-> "🎉 Your project is live! You can see it at **{{PROJECT_NAME}}.test**."
+> "🎉 Your project is live! Whenever you're working on it, run `npm run dev` in your terminal to enable live reloading. You don't need it just to view the site — only when you're actively making changes."
 
 Create the first Git commit:
 ```bash
@@ -251,6 +256,6 @@ Remind them:
 
 Then give this closing instruction:
 
-> "One last thing — close this tab and open your project folder (`~/Projects/{{PROJECT_NAME}}`) in a new window. That's where you'll do all your building from now on."
+> "One last thing — close this tab and open your project folder (`{{PROJECTS_DIR}}/{{PROJECT_NAME}}`) in a new window. That's where you'll do all your building from now on."
 
 **The setup is complete. The builder is ready to build.**
