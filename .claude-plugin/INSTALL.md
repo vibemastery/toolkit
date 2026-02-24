@@ -26,12 +26,11 @@ If your environment cannot access marketplace installation, use Method 2.
 git clone https://github.com/vibemastery/toolkit.git ~/.claude/vibemastery-toolkit
 ```
 
-### 2) Link skills into Claude Code global skills directory
+### 2) Copy skills into Claude Code global skills directory
 
 ```bash
 mkdir -p ~/.claude/skills
-rm -rf ~/.claude/skills/vibemastery-toolkit
-ln -s ~/.claude/vibemastery-toolkit/skills ~/.claude/skills/vibemastery-toolkit
+cp -r ~/.claude/vibemastery-toolkit/skills/. ~/.claude/skills/
 ```
 
 ### 3) Add Laravel validation agents to your current project
@@ -59,10 +58,11 @@ If agents are available, the brainstorming workflow can run Laravel design valid
 
 ## Update later
 
-- Marketplace install: run plugin update commands in Claude Code.
+- Marketplace install: run `/plugin marketplace update vibemastery-marketplace` in Claude Code, then reinstall if needed.
 - Manual install:
 
 ```bash
 cd ~/.claude/vibemastery-toolkit
 git pull
+cp -r skills/. ~/.claude/skills/
 ```

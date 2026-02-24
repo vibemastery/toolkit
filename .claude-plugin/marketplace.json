@@ -11,11 +11,10 @@
     {
       "name": "vibemastery-toolkit",
       "source": {
-        "source": "url",
-        "url": "https://github.com/vibemastery/toolkit.git"
+        "source": "github",
+        "repo": "vibemastery/toolkit"
       },
       "description": "Beginner-first Laravel workflow with skills and specialist validation agents.",
-      "version": "1.0.0",
       "strict": true
     }
   ]
