@@ -12,6 +12,7 @@ Turn rough ideas into a clear, beginner-friendly high-level plan.
 1. Do not write implementation code during this skill.
 2. Do not commit changes. The user must review everything first.
 3. Ask one question at a time when clarification is needed.
+4. Never work on `main` (or the default branch). Check the current branch at the start — if on `main`, create a feature branch before any file changes.
 
 ## Agents (Optional)
 
@@ -22,7 +23,7 @@ Laravel validation agents enhance this skill with specialist reviews:
 - `pest-tdd-expert`
 - `pest-browser-testing`
 
-If these agents are available, use them in Step 5. If they are not available, skip Step 5 and note in the plan that validation was skipped. Do not block the workflow — continue to produce and save the plan without agent feedback.
+If these agents are available, use them in Step 6. If they are not available, skip Step 6 and note in the plan that validation was skipped. Do not block the workflow — continue to produce and save the plan without agent feedback.
 
 ## Goals
 
@@ -34,20 +35,21 @@ If these agents are available, use them in Step 5. If they are not available, sk
 
 ## Workflow
 
-1. Explore project context (files, existing patterns, constraints).
-2. Clarify the idea with short, plain-English questions.
-3. Propose 2-3 implementation approaches with trade-offs.
-4. Recommend one approach and explain why it is best.
-5. Validate the design using these Laravel subagents:
+1. Check the current git branch. If on `main` (or the default branch), create and switch to a feature branch named `feature/<short-topic>` before making any changes. Ask the user to confirm the branch name.
+2. Explore project context (files, existing patterns, constraints).
+3. Clarify the idea with short, plain-English questions.
+4. Propose 2-3 implementation approaches with trade-offs.
+5. Recommend one approach and explain why it is best.
+6. Validate the design using these Laravel subagents:
    - `laravel-architect` for framework design quality
    - `laravel-security-reviewer` for security risks
    - `pest-tdd-expert` for test strategy
    - `pest-browser-testing` for browser/E2E coverage when UI is involved
-6. Merge agent feedback, then present the refined design.
-7. Ask where to save the plan before writing any plan file.
-8. Write the approved high-level plan doc.
-9. Invoke `interview` to conduct a technical interview on the plan. This stress-tests the design by probing edge cases, failure modes, and hidden assumptions before implementation begins.
-10. Invoke `writing-plans` to generate the detailed implementation plan.
+7. Merge agent feedback, then present the refined design.
+8. Ask where to save the plan before writing any plan file.
+9. Write the approved high-level plan doc.
+10. Invoke `interview` to conduct a technical interview on the plan. This stress-tests the design by probing edge cases, failure modes, and hidden assumptions before implementation begins.
+11. Invoke `writing-plans` to generate the detailed implementation plan.
 
 ## Ask This Before Saving
 
