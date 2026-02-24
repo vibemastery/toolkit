@@ -20,17 +20,47 @@ Skills work with Claude Code, OpenCode, Codex, and any agent that supports the [
 
 ---
 
-## Usage
+## Installation
 
-Install a skill into your project:
+### Recommended Quick Start
+
+#### Claude Code (Plugin Marketplace)
+
+```bash
+/plugin marketplace add vibemastery/toolkit
+/plugin install vibemastery-toolkit@vibemastery-marketplace
+```
+
+If your environment cannot access marketplace installation, use the detailed Claude Code guide below.
+
+#### Codex
+
+Tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/vibemastery/toolkit/main/.codex/INSTALL.md
+```
+
+#### OpenCode
+
+Tell OpenCode:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/vibemastery/toolkit/main/.opencode/INSTALL.md
+```
+
+### skills.sh only (skills, no agents)
+
+Install all skills from this repository:
+
+```bash
+npx skills add vibemastery/toolkit --skill '*'
+```
+
+Or install one skill at a time:
 
 ```bash
 npx skills add vibemastery/toolkit/skills/setup-wizard
-```
-
-Or install another skill directly:
-
-```bash
 npx skills add vibemastery/toolkit/skills/prompt-router
 npx skills add vibemastery/toolkit/skills/debug-coach
 npx skills add vibemastery/toolkit/skills/brainstorming
@@ -38,6 +68,8 @@ npx skills add vibemastery/toolkit/skills/writing-plans
 npx skills add vibemastery/toolkit/skills/executing-plans
 npx skills add vibemastery/toolkit/skills/subagent-driven-development
 ```
+
+Important: `skills.sh` discovers and installs `SKILL.md` skills only. It does not install top-level `agents/` files.
 
 Then invoke it from your AI tool:
 
@@ -63,6 +95,9 @@ run subagent-driven-development
 
 ```
 toolkit/
+├── .claude-plugin/          ← Claude plugin marketplace/plugin manifests
+├── .opencode/               ← OpenCode install/bootstrap docs
+├── .codex/                  ← Codex install/bootstrap docs
 ├── agents/                 ← Laravel design validation agents
 └── skills/
     └── <skill-name>/
@@ -74,3 +109,11 @@ toolkit/
 Each skill is self-contained under `skills/<skill-name>/`. Adding a new skill means adding a new folder — nothing else changes.
 
 Note: per `skills.sh`, skill discovery is based on `SKILL.md` locations (for example `skills/` or `.agents/skills/`). The top-level `agents/` folder is for reusable specialist agents, not skill discovery.
+
+---
+
+## Acknowledgements
+
+Built on the open `skills.sh` ecosystem and inspired by the Laravel and testing communities that share practical patterns for beginners.
+
+Special thanks to [obra/superpowers](https://github.com/obra/superpowers) for pioneering skill patterns that influenced several workflows in this toolkit.

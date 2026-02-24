@@ -1,0 +1,17 @@
+{
+  "name": "vibemastery-toolkit",
+  "description": "Beginner-first Laravel workflow skills and specialist validation agents.",
+  "version": "1.0.0",
+  "author": {
+    "name": "VibeMastery"
+  },
+  "homepage": "https://github.com/vibemastery/toolkit",
+  "repository": "https://github.com/vibemastery/toolkit",
+  "keywords": [
+    "skills",
+    "laravel",
+    "agents",
+    "beginner",
+    "planning"
+  ]
+}

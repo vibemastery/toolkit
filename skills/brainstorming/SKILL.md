@@ -13,6 +13,17 @@ Turn rough ideas into a clear, beginner-friendly high-level plan.
 2. Do not commit changes. The user must review everything first.
 3. Ask one question at a time when clarification is needed.
 
+## Prerequisite
+
+This skill expects Laravel validation agents to be available:
+
+- `laravel-architect`
+- `laravel-security-reviewer`
+- `pest-tdd-expert`
+- `pest-browser-testing`
+
+If these agents are missing, tell the user to install the full toolkit plugin bundle (not skills-only install) or copy `agents/` into the project before continuing.
+
 ## Goals
 
 1. Understand what the user wants to build and why.

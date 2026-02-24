@@ -1,0 +1,22 @@
+{
+  "name": "vibemastery-marketplace",
+  "owner": {
+    "name": "VibeMastery"
+  },
+  "metadata": {
+    "description": "Beginner-first Laravel workflows, skills, and validation agents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "vibemastery-toolkit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/vibemastery/toolkit.git"
+      },
+      "description": "Beginner-first Laravel workflow with skills and specialist validation agents.",
+      "version": "1.0.0",
+      "strict": true
+    }
+  ]
+}
