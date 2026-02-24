@@ -46,7 +46,8 @@ If these agents are available, use them in Step 5. If they are not available, sk
 6. Merge agent feedback, then present the refined design.
 7. Ask where to save the plan before writing any plan file.
 8. Write the approved high-level plan doc.
-9. Invoke `writing-plans` to generate the detailed implementation plan.
+9. Invoke `interview` to conduct a technical interview on the plan. This stress-tests the design by probing edge cases, failure modes, and hidden assumptions before implementation begins.
+10. Invoke `writing-plans` to generate the detailed implementation plan.
 
 ## Ask This Before Saving
 
@@ -99,14 +100,20 @@ The brainstorming session is complete only when:
 1. The user approves the recommended approach.
 2. The plan has been validated with Laravel agents (if available) or the skip is noted.
 3. The plan is saved to a user-approved location.
-4. The `writing-plans` skill has been invoked.
-5. No commit has been created.
+4. The `interview` skill has been invoked to stress-test the plan.
+5. The `writing-plans` skill has been invoked.
+6. No commit has been created.
 
 ## Mandatory Handoff
 
-After saving the high-level plan, immediately hand off to `writing-plans`.
+After saving the high-level plan:
 
-- Announce: "I am now using `writing-plans` to produce the step-by-step implementation plan."
-- Pass the approved scope, constraints, and validation feedback.
-- Keep the beginner-first tone.
-- Do not start coding.
+1. Invoke `interview` to conduct a technical interview on the saved plan.
+   - Announce: "I am now using `interview` to stress-test the plan before implementation."
+   - The interview will probe edge cases, failure modes, and hidden assumptions.
+   - After the interview, the spec will be updated with decisions and discoveries.
+2. Then invoke `writing-plans` to generate the detailed implementation plan.
+   - Announce: "I am now using `writing-plans` to produce the step-by-step implementation plan."
+   - Pass the approved scope, constraints, validation feedback, and interview findings.
+   - Keep the beginner-first tone.
+   - Do not start coding.

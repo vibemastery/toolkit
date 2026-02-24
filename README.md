@@ -15,11 +15,11 @@ Skills work with Claude Code, OpenCode, Codex, and any agent that supports the [
 The skills follow a natural pipeline:
 
 ```
-brainstorming → writing-plans → executing-plans
-                             └→ subagent-driven-development
+brainstorming → interview → writing-plans → executing-plans
+                                          └→ subagent-driven-development
 ```
 
-`brainstorming` shapes your idea and validates the design. `writing-plans` turns that into a step-by-step task list. Then you pick your execution style: `executing-plans` for batch progress in a separate session, or `subagent-driven-development` for task-by-task work in the same session.
+`brainstorming` shapes your idea and validates the design. `interview` stress-tests the plan by probing edge cases, failure modes, and hidden assumptions. `writing-plans` turns that into a step-by-step task list. Then you pick your execution style: `executing-plans` for batch progress in a separate session, or `subagent-driven-development` for task-by-task work in the same session.
 
 `setup-wizard` and `debug-coach` are standalone — use them independently.
 
@@ -32,6 +32,7 @@ brainstorming → writing-plans → executing-plans
 | [setup-wizard](skills/setup-wizard/) | Starting a brand new Laravel project |
 | [debug-coach](skills/debug-coach/) | Something is broken — errors, failed commands, unexpected behavior |
 | [brainstorming](skills/brainstorming/) | You have a feature idea and want to think it through before coding |
+| [interview](skills/interview/) | You have a plan and want to stress-test it before implementation |
 | [writing-plans](skills/writing-plans/) | You have an approved design and want a step-by-step implementation plan |
 | [executing-plans](skills/executing-plans/) | You have a plan and want to execute it in batches with review checkpoints |
 | [subagent-driven-development](skills/subagent-driven-development/) | You have a plan and want to execute it task-by-task with spec and quality reviews |
@@ -84,6 +85,7 @@ Or install one skill at a time:
 npx skills add vibemastery/toolkit --skill setup-wizard
 npx skills add vibemastery/toolkit --skill debug-coach
 npx skills add vibemastery/toolkit --skill brainstorming
+npx skills add vibemastery/toolkit --skill interview
 npx skills add vibemastery/toolkit --skill writing-plans
 npx skills add vibemastery/toolkit --skill executing-plans
 npx skills add vibemastery/toolkit --skill subagent-driven-development
@@ -100,6 +102,7 @@ Once installed, tell your AI tool what you want to do in plain English:
 | Set up a new project | `run setup wizard` |
 | Debug an error | `run debug coach` — then paste your error |
 | Plan a new feature | `run brainstorming` — then describe your idea |
+| Stress-test a plan | `run interview` — then share the plan file path |
 | Write an implementation plan | `run writing plans` — then share your approved design |
 | Execute a plan in batches | `run executing plans` — then share the plan file path |
 | Execute a plan task-by-task | `run subagent-driven-development` — then share the plan file path |
