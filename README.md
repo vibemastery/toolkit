@@ -11,6 +11,8 @@ Skills work with Claude Code, OpenCode, Codex, and any agent that supports the [
 | Skill | What It Does | Install |
 |---|---|---|
 | [setup-wizard](skills/setup-wizard/) | Sets up a fresh Laravel project with Inertia + React, Pest, optional auth and admin panel | `npx skills add vibemastery/toolkit/skills/setup-wizard` |
+| [prompt-router](skills/prompt-router/) | Routes learners to the best prompt/skill based on what they are building right now | `npx skills add vibemastery/toolkit/skills/prompt-router` |
+| [debug-coach](skills/debug-coach/) | Turns Laravel errors into plain English and guides root-cause-first fixes | `npx skills add vibemastery/toolkit/skills/debug-coach` |
 
 ---
 
@@ -22,10 +24,21 @@ Install a skill into your project:
 npx skills add vibemastery/toolkit/skills/setup-wizard
 ```
 
+Or install another skill directly:
+
+```bash
+npx skills add vibemastery/toolkit/skills/prompt-router
+npx skills add vibemastery/toolkit/skills/debug-coach
+```
+
 Then invoke it from your AI tool:
 
 ```
 run the setup wizard
+
+run prompt router
+
+run debug coach
 ```
 
 ---
