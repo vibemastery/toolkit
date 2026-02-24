@@ -6,17 +6,35 @@ Skills work with Claude Code, OpenCode, Codex, and any agent that supports the [
 
 ---
 
+## Start Here
+
+**New to VibeMastery?** Begin with the setup wizard to create your first project, then use brainstorming whenever you want to build something new.
+
+**Already have a project?** Jump straight to `brainstorming` for new features, or `debug-coach` when something breaks.
+
+The skills follow a natural pipeline:
+
+```
+brainstorming → writing-plans → executing-plans
+                             └→ subagent-driven-development
+```
+
+`brainstorming` shapes your idea and validates the design. `writing-plans` turns that into a step-by-step task list. Then you pick your execution style: `executing-plans` for batch progress in a separate session, or `subagent-driven-development` for task-by-task work in the same session.
+
+`setup-wizard` and `debug-coach` are standalone — use them independently.
+
+---
+
 ## Available Skills
 
-| Skill | What It Does | Install |
-|---|---|---|
-| [setup-wizard](skills/setup-wizard/) | Sets up a fresh Laravel project with Inertia + React, Pest, optional auth and admin panel | `npx skills add vibemastery/toolkit/skills/setup-wizard` |
-| [prompt-router](skills/prompt-router/) | Routes learners to the best prompt/skill based on what they are building right now | `npx skills add vibemastery/toolkit/skills/prompt-router` |
-| [debug-coach](skills/debug-coach/) | Turns Laravel errors into plain English and guides root-cause-first fixes | `npx skills add vibemastery/toolkit/skills/debug-coach` |
-| [brainstorming](skills/brainstorming/) | Converts feature ideas into a beginner-friendly, agent-validated high-level plan, then hands off to writing-plans | `npx skills add vibemastery/toolkit/skills/brainstorming` |
-| [writing-plans](skills/writing-plans/) | Converts approved designs into beginner-friendly, step-by-step implementation plans before coding | `npx skills add vibemastery/toolkit/skills/writing-plans` |
-| [executing-plans](skills/executing-plans/) | Executes implementation plans in batches with verification checkpoints and user feedback loops | `npx skills add vibemastery/toolkit/skills/executing-plans` |
-| [subagent-driven-development](skills/subagent-driven-development/) | Executes implementation plans in-session with per-task subagent implementation plus spec and quality reviews | `npx skills add vibemastery/toolkit/skills/subagent-driven-development` |
+| Skill | When to use it |
+|---|---|
+| [setup-wizard](skills/setup-wizard/) | Starting a brand new Laravel project |
+| [debug-coach](skills/debug-coach/) | Something is broken — errors, failed commands, unexpected behavior |
+| [brainstorming](skills/brainstorming/) | You have a feature idea and want to think it through before coding |
+| [writing-plans](skills/writing-plans/) | You have an approved design and want a step-by-step implementation plan |
+| [executing-plans](skills/executing-plans/) | You have a plan and want to execute it in batches with review checkpoints |
+| [subagent-driven-development](skills/subagent-driven-development/) | You have a plan and want to execute it task-by-task with spec and quality reviews |
 
 ---
 
@@ -49,6 +67,9 @@ Tell OpenCode:
 Fetch and follow instructions from https://raw.githubusercontent.com/vibemastery/toolkit/main/.opencode/INSTALL.md
 ```
 
+OpenCode subagents are defined as markdown files in `.opencode/agents/`.
+Codex multi-agent role configs are defined in `.codex/agents/*.toml`.
+
 ### skills.sh only (skills, no agents)
 
 Install all skills from this repository:
@@ -61,7 +82,6 @@ Or install one skill at a time:
 
 ```bash
 npx skills add vibemastery/toolkit/skills/setup-wizard
-npx skills add vibemastery/toolkit/skills/prompt-router
 npx skills add vibemastery/toolkit/skills/debug-coach
 npx skills add vibemastery/toolkit/skills/brainstorming
 npx skills add vibemastery/toolkit/skills/writing-plans
@@ -69,25 +89,20 @@ npx skills add vibemastery/toolkit/skills/executing-plans
 npx skills add vibemastery/toolkit/skills/subagent-driven-development
 ```
 
-Important: `skills.sh` discovers and installs `SKILL.md` skills only. It does not install top-level `agents/` files.
+Important: `skills.sh` discovers and installs `SKILL.md` skills only. It does not install OpenCode markdown subagents from `.opencode/agents/` or Codex role configs from `.codex/agents/`.
 
-Then invoke it from your AI tool:
+### How to invoke each skill
 
-```
-run the setup wizard
+Once installed, tell your AI tool what you want to do in plain English:
 
-run prompt router
-
-run debug coach
-
-run brainstorming
-
-run writing plans
-
-run executing plans
-
-run subagent-driven-development
-```
+| You want to... | Say this |
+|---|---|
+| Set up a new project | `run setup wizard` |
+| Debug an error | `run debug coach` — then paste your error |
+| Plan a new feature | `run brainstorming` — then describe your idea |
+| Write an implementation plan | `run writing plans` — then share your approved design |
+| Execute a plan in batches | `run executing plans` — then share the plan file path |
+| Execute a plan task-by-task | `run subagent-driven-development` — then share the plan file path |
 
 ---
 
@@ -96,14 +111,18 @@ run subagent-driven-development
 ```
 toolkit/
 ├── .claude-plugin/          ← Claude plugin marketplace/plugin manifests
-├── .opencode/               ← OpenCode install/bootstrap docs
-├── .codex/                  ← Codex install/bootstrap docs
-├── agents/                 ← Laravel design validation agents
+├── .opencode/
+│   ├── INSTALL.md           ← OpenCode install guide
+│   └── agents/              ← OpenCode markdown subagents
+├── .codex/
+│   ├── INSTALL.md           ← Codex install guide
+│   ├── agents/              ← Codex multi-agent role config files
+│   └── config.roles.example.toml
+├── agents/                  ← Shared agent definitions for Claude-style setups
 └── skills/
     └── <skill-name>/
         ├── SKILL.md          ← skill instructions (required)
-        ├── references/       ← templates and reference files
-        └── scripts/          ← helper scripts
+        └── references/       ← templates and reference files
 ```
 
 Each skill is self-contained under `skills/<skill-name>/`. Adding a new skill means adding a new folder — nothing else changes.

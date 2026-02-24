@@ -13,16 +13,16 @@ Turn rough ideas into a clear, beginner-friendly high-level plan.
 2. Do not commit changes. The user must review everything first.
 3. Ask one question at a time when clarification is needed.
 
-## Prerequisite
+## Agents (Optional)
 
-This skill expects Laravel validation agents to be available:
+Laravel validation agents enhance this skill with specialist reviews:
 
 - `laravel-architect`
 - `laravel-security-reviewer`
 - `pest-tdd-expert`
 - `pest-browser-testing`
 
-If these agents are missing, tell the user to install the full toolkit plugin bundle (not skills-only install) or copy `agents/` into the project before continuing.
+If these agents are available, use them in Step 5. If they are not available, skip Step 5 and note in the plan that validation was skipped. Do not block the workflow — continue to produce and save the plan without agent feedback.
 
 ## Goals
 
@@ -38,11 +38,11 @@ If these agents are missing, tell the user to install the full toolkit plugin bu
 2. Clarify the idea with short, plain-English questions.
 3. Propose 2-3 implementation approaches with trade-offs.
 4. Recommend one approach and explain why it is best.
-5. Validate the design using the Laravel agents in `agents/`:
-   - `laravel-architect.md` for framework design quality
-   - `laravel-security-reviewer.md` for security risks
-   - `pest-tdd-expert.md` for test strategy
-   - `pest-browser-testing.md` for browser/E2E coverage when UI is involved
+5. Validate the design using these Laravel subagents:
+   - `laravel-architect` for framework design quality
+   - `laravel-security-reviewer` for security risks
+   - `pest-tdd-expert` for test strategy
+   - `pest-browser-testing` for browser/E2E coverage when UI is involved
 6. Merge agent feedback, then present the refined design.
 7. Ask where to save the plan before writing any plan file.
 8. Write the approved high-level plan doc.
@@ -83,7 +83,7 @@ Always respond using these sections:
 
 Before finalizing the plan:
 
-1. Run design checks with relevant agents from `agents/`.
+1. Run design checks with relevant Laravel subagents.
 2. Capture only actionable findings.
 3. Resolve conflicts by prioritizing:
    1) security,
@@ -97,7 +97,7 @@ Before finalizing the plan:
 The brainstorming session is complete only when:
 
 1. The user approves the recommended approach.
-2. The plan has been validated with the relevant Laravel agents.
+2. The plan has been validated with Laravel agents (if available) or the skip is noted.
 3. The plan is saved to a user-approved location.
 4. The `writing-plans` skill has been invoked.
 5. No commit has been created.

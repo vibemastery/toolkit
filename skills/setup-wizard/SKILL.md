@@ -202,30 +202,7 @@ No extra configuration is needed. Codex picks up project context automatically f
 
 ---
 
-## Step 6 — Run Health Checks
-
-*Tell the builder: "Let me do a quick check to make sure everything is working properly."*
-
-Run:
-```bash
-bash .claude/skills/setup-wizard/scripts/health-check.sh {{PROJECT_NAME}}
-```
-
-If the script isn't available (skill not installed locally), run these checks manually:
-
-```bash
-php -v && echo "PHP OK" || echo "PHP missing"
-composer --version && echo "Composer OK" || echo "Composer missing"
-node -v && echo "Node OK" || echo "Node missing"
-npm -v && echo "NPM OK" || echo "NPM missing"
-php artisan --version && echo "Laravel OK" || echo "Laravel not responding"
-```
-
-For each failure, explain it in plain English — no raw error stack traces. If a fix is needed, guide through it before continuing.
-
----
-
-## Step 7 — First Run
+## Step 6 — First Run
 
 *Tell the builder: "Everything is set up. Let's see your project running for the first time."*
 

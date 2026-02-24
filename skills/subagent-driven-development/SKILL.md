@@ -33,11 +33,13 @@ Implement plan tasks using focused subagents and strict review gates.
 
 ## Prompt Templates
 
-Use these helper templates when dispatching subagents:
+Use these helper templates when dispatching subagents. They are located in the same directory as this skill file (e.g. `skills/subagent-driven-development/` or `.claude/skills/vibemastery-toolkit/subagent-driven-development/` depending on your install):
 
 - `implementer-prompt.md`
 - `spec-reviewer-prompt.md`
 - `code-quality-reviewer-prompt.md`
+
+Read the relevant file and use its contents as the subagent prompt, filling in the task text and context placeholders.
 
 ## Per-Task Output Format
 

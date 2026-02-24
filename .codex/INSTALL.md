@@ -1,6 +1,6 @@
 # Installing VibeMastery Toolkit for Codex
 
-This guide installs all toolkit skills globally and makes Laravel validation agents available per project.
+This guide installs toolkit skills and Codex multi-agent role configs.
 
 ## Prerequisites
 
@@ -16,25 +16,40 @@ git clone https://github.com/vibemastery/toolkit.git ~/.codex/vibemastery-toolki
 ## 2) Link skills into Codex global skills directory
 
 ```bash
-mkdir -p ~/.codex/skills
-rm -rf ~/.codex/skills/vibemastery-toolkit
-ln -s ~/.codex/vibemastery-toolkit/skills ~/.codex/skills/vibemastery-toolkit
+mkdir -p ~/.agents/skills
+rm -rf ~/.agents/skills/vibemastery-toolkit
+ln -s ~/.codex/vibemastery-toolkit/skills ~/.agents/skills/vibemastery-toolkit
 ```
 
-## 3) Add Laravel validation agents to your current project
+## 3) Install Codex role config files
 
-Run this inside the project where you want to use brainstorming/design validation:
+Codex multi-agent roles load from `~/.codex/agents/*.toml`.
 
 ```bash
-mkdir -p ./agents
-cp -R ~/.codex/vibemastery-toolkit/agents/. ./agents/
+mkdir -p ~/.codex/agents
+cp -R ~/.codex/vibemastery-toolkit/.codex/agents/. ~/.codex/agents/
 ```
 
-## 4) Restart Codex
+## 4) Register role definitions in `~/.codex/config.toml`
 
-Restart Codex so the newly linked skills are discovered.
+Copy the snippet from:
 
-## 5) Verify
+`~/.codex/vibemastery-toolkit/.codex/config.roles.example.toml`
+
+and merge it into your `~/.codex/config.toml`.
+
+This enables `multi_agent = true` and registers:
+
+- `laravel-architect`
+- `laravel-security-reviewer`
+- `pest-tdd-expert`
+- `pest-browser-testing`
+
+## 5) Restart Codex
+
+Restart Codex so new skills and roles are discovered.
+
+## 6) Verify
 
 In a new Codex session, ask:
 
@@ -42,11 +57,21 @@ In a new Codex session, ask:
 run brainstorming
 ```
 
-If agents are available, the brainstorming workflow can run Laravel design validation.
+Then verify role-based multi-agent usage:
+
+```text
+Spawn one laravel-architect agent to review this Laravel design and summarize recommendations.
+```
+
+If this works, Codex role setup is complete.
 
 ## Update later
 
+> **Note:** Skills are symlinked, so a `git pull` updates them automatically. However, Codex role config files are _copied_, not symlinked — you must re-copy them after each update.
+
 ```bash
-cd ~/.codex/vibemastery-toolkit
-git pull
+cd ~/.codex/vibemastery-toolkit && git pull
+cp -R .codex/agents/. ~/.codex/agents/
 ```
+
+Run both lines together every time you update.

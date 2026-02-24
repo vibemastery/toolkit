@@ -1,0 +1,21 @@
+# Copy these entries into ~/.codex/config.toml
+# and keep .codex/agents/*.toml in your Codex home (usually ~/.codex/agents).
+
+[features]
+multi_agent = true
+
+[agents."laravel-architect"]
+description = "Laravel architecture reviewer focused on simple, maintainable, Laravel-native design."
+config_file = "agents/laravel-architect.toml"
+
+[agents."laravel-security-reviewer"]
+description = "Laravel security reviewer for threat modeling and practical risk reduction."
+config_file = "agents/laravel-security-reviewer.toml"
+
+[agents."pest-tdd-expert"]
+description = "Pest TDD reviewer for Laravel test strategy and RED-GREEN-REFACTOR rigor."
+config_file = "agents/pest-tdd-expert.toml"
+
+[agents."pest-browser-testing"]
+description = "Browser testing reviewer for Laravel user journeys with Pest browser tests."
+config_file = "agents/pest-browser-testing.toml"

@@ -1,6 +1,6 @@
 # Installing VibeMastery Toolkit for OpenCode
 
-This guide installs all toolkit skills globally and makes Laravel validation agents available per project.
+This guide installs toolkit skills globally and installs Laravel validation subagents for OpenCode.
 
 ## Prerequisites
 
@@ -21,13 +21,22 @@ rm -rf ~/.config/opencode/skills/vibemastery-toolkit
 ln -s ~/.config/opencode/vibemastery-toolkit/skills ~/.config/opencode/skills/vibemastery-toolkit
 ```
 
-## 3) Add Laravel validation agents to your current project
+## 3) Install OpenCode subagents (markdown agents)
 
-Run this inside the project where you want to use brainstorming/design validation:
+OpenCode discovers markdown agents from `~/.config/opencode/agents/` (global) or `.opencode/agents/` (project).
+
+Global install (recommended):
 
 ```bash
-mkdir -p ./agents
-cp -R ~/.config/opencode/vibemastery-toolkit/agents/. ./agents/
+mkdir -p ~/.config/opencode/agents
+cp -R ~/.config/opencode/vibemastery-toolkit/.opencode/agents/. ~/.config/opencode/agents/
+```
+
+Project-only install (optional):
+
+```bash
+mkdir -p ./.opencode/agents
+cp -R ~/.config/opencode/vibemastery-toolkit/.opencode/agents/. ./.opencode/agents/
 ```
 
 ## 4) Restart OpenCode
@@ -42,7 +51,13 @@ In a new OpenCode session, ask:
 run brainstorming
 ```
 
-If agents are available, the brainstorming workflow can run Laravel design validation.
+And verify direct subagent invocation:
+
+```text
+@laravel-architect review this design idea
+```
+
+If this runs, markdown subagent loading is working.
 
 ## Update later
 
