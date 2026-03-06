@@ -1,11 +1,11 @@
 ---
 name: laravel-taste-validator
-description: Validates Laravel application code against 14 "Laravel Taste" principles — the same design philosophy used by the framework itself. Use when the user wants to audit application-layer code quality, asks "does this follow Laravel conventions?", wants architectural feedback on controllers/models/actions/policies, or says "validate my code", "review this against best practices", "apply Laravel taste", or "check my architecture". Runs the vibemastery-toolkit:laravel-architect agent as the validator for each applicable principle.
+description: Validates Laravel application code against "Laravel Taste" principles — the same design philosophy used by the framework itself. Use when the user wants to audit application-layer code quality, asks "does this follow Laravel conventions?", wants architectural feedback on controllers/models/actions/policies, or says "validate my code", "review this against best practices", "apply Laravel taste", or "check my architecture". Runs the vibemastery-toolkit:laravel-architect agent as the validator for each applicable principle.
 ---
 
 # Laravel Taste Validator
 
-Validates application code against 14 principles that mirror how the Laravel framework itself is designed. For each applicable principle, it delegates to the `vibemastery-toolkit:laravel-architect` agent for expert review.
+Validates application code against principles that mirror how the Laravel framework itself is designed. For each applicable principle, it delegates to the `vibemastery-toolkit:laravel-architect` agent for expert review.
 
 ## Principle Reference Files
 
@@ -27,23 +27,30 @@ Each principle has a dedicated reference file with validation criteria, code exa
 | 12 | [12-thin-controllers.md](references/12-thin-controllers.md) | ≤15 lines, FormRequest, scopes, action classes |
 | 13 | [13-authorization-policies.md](references/13-authorization-policies.md) | Policies, route `->can()`, FormRequest `authorize()`, no `$this->authorize()` |
 | 14 | [14-test-through-public-api.md](references/14-test-through-public-api.md) | Behavior not internals, factories, descriptive test names |
+| 15 | [15-validation-decision-tree.md](references/15-validation-decision-tree.md) | Right validation tool per scenario, `prepareForValidation`, `after` hook, `DataAwareRule` |
+| 16 | [16-separate-validation-from-business-logic.md](references/16-separate-validation-from-business-logic.md) | FormRequests validate shape, actions enforce business rules, guard clauses |
+| 17 | [17-intentional-exceptions.md](references/17-intentional-exceptions.md) | Custom exceptions, self-rendering `render()`, `context()`, `report()` |
+| 18 | [18-communicate-errors-to-users.md](references/18-communicate-errors-to-users.md) | Inline validation errors, flash for business errors, precise messages |
+| 19 | [19-errors-as-values.md](references/19-errors-as-values.md) | Result objects over exceptions for domain errors, visible failure paths |
+| 20 | [20-prefer-collection-pipelines-over-loops.md](references/20-prefer-collection-pipelines-over-loops.md) | Replace loops with `map`, `filter`, `reduce`, `pluck`, `flatMap`; chain operations |
 
 ## Workflow
 
 ### Step 1: Identify which principles apply
 
-Based on the files or code shared by the user, identify which of the 14 principles are relevant. You don't need to run all 14 for every review — select those applicable to the code at hand.
+Based on the files or code shared by the user, identify which principles are relevant. You don't need to run all 14 for every review — select those applicable to the code at hand.
 
 **Quick mapping:**
-- Controllers → principles 2, 12, 13
-- Models → principles 1, 2, 5, 8, 9, 11
+- Controllers → principles 2, 12, 13, 17, 18, 20
+- Models → principles 1, 2, 5, 8, 9, 11, 20
 - Policies → principle 13
-- FormRequests → principles 2, 13
+- FormRequests → principles 2, 13, 15, 16
 - Routes → principles 1, 13
 - Tests → principle 14
-- Action classes → principles 7, 10
-- Service/utility classes → principles 4, 5, 6, 10, 11
+- Action classes → principles 7, 10, 16, 17, 19, 20
+- Service/utility classes → principles 4, 5, 6, 10, 11, 19, 20
 - Query scopes → principles 3, 9
+- Exception classes → principles 17, 18, 19
 
 ### Step 2: Load relevant principle files and delegate to the architect
 
@@ -95,6 +102,12 @@ After all principle reviews complete, present a structured report:
 - [ ] Am I building magic or using magic?
 - [ ] Does authorization run automatically?
 - [ ] Is this tested through the behavior it produces?
+- [ ] Am I using the right validation tool for this scenario?
+- [ ] Is validation separate from business logic?
+- [ ] Do my exceptions render and report themselves?
+- [ ] Do error messages tell the user how to fix the problem?
+- [ ] Am I throwing exceptions for normal domain outcomes instead of returning results?
+- [ ] Could this loop be a collection pipeline?
 ```
 
 ## Scoped Reviews
@@ -103,9 +116,11 @@ For targeted reviews, load only the relevant principles:
 
 | Scenario | Principles to apply |
 |----------|---------------------|
-| "Review this controller" | 2, 12, 13 |
-| "Review this model" | 1, 2, 5, 8, 9, 11 |
-| "Review this service/action class" | 4, 5, 6, 7, 10 |
+| "Review this controller" | 2, 12, 13, 17, 18, 20 |
+| "Review this model" | 1, 2, 5, 8, 9, 11, 20 |
+| "Review this service/action class" | 4, 5, 6, 7, 10, 16, 17, 19, 20 |
 | "Review my tests" | 14 |
 | "Review my routes/policies" | 1, 13 |
-| Full audit | All 14 |
+| "Review my form requests" | 2, 13, 15, 16 |
+| "Review my exceptions/error handling" | 17, 18, 19 |
+| Full audit | All 20 |
