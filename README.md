@@ -36,6 +36,7 @@ brainstorming → interview → writing-plans → executing-plans
 | [writing-plans](skills/writing-plans/) | You have an approved design and want a step-by-step implementation plan |
 | [executing-plans](skills/executing-plans/) | You have a plan and want to execute it in batches with review checkpoints |
 | [subagent-driven-development](skills/subagent-driven-development/) | You have a plan and want to execute it task-by-task with spec and quality reviews |
+| [laravel-taste-validator](skills/laravel-taste-validator/) | You want to validate code against Laravel's own design principles |
 
 ---
 
@@ -89,6 +90,7 @@ npx skills add vibemastery/toolkit --skill interview
 npx skills add vibemastery/toolkit --skill writing-plans
 npx skills add vibemastery/toolkit --skill executing-plans
 npx skills add vibemastery/toolkit --skill subagent-driven-development
+npx skills add vibemastery/toolkit --skill laravel-taste-validator
 ```
 
 Important: the `skills` CLI discovers and installs `SKILL.md` skills only. It does not install OpenCode markdown subagents from `.opencode/agents/` or Codex role configs from `.codex/agents/`.
@@ -106,6 +108,7 @@ Once installed, tell your AI tool what you want to do in plain English:
 | Write an implementation plan | `run writing plans` — then share your approved design |
 | Execute a plan in batches | `run executing plans` — then share the plan file path |
 | Execute a plan task-by-task | `run subagent-driven-development` — then share the plan file path |
+| Validate code against Laravel conventions | `run laravel taste validator` — then share the files to review |
 
 ---
 
