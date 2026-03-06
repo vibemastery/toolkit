@@ -166,6 +166,40 @@ $totals = $orders->map(fn ($order) => $order->total);
 $users->each(fn ($user) => $user->notify(new WelcomeNotification));
 ```
 
+### 9. Use `chunkWhile` to group adjacent items by condition
+```php
+// VIOLATION: foreach with "previous item" tracking to merge adjacent same-type items
+$groups = [];
+$current = [$items[0]];
+for ($i = 1; $i < count($items); $i++) {
+    if ($items[$i]['type'] === end($current)['type']) {
+        $current[] = $items[$i];
+    } else {
+        $groups[] = $current;
+        $current = [$items[$i]];
+    }
+}
+$groups[] = $current;
+
+// CORRECT: chunkWhile groups adjacent items that satisfy a condition
+$groups = $items->chunkWhile(
+    fn ($item, $key, $chunk) => $item['type'] === $chunk->last()['type']
+);
+
+// Real-world example: merge adjacent text parts into single strings
+$mergedParts = wrap($parts)
+    ->chunkWhile(
+        fn (array $part, int $key, Collection $chunk): bool =>
+            $part['type'] === 'text' && $chunk->last()['type'] === 'text'
+    )
+    ->map(fn (Collection $chunk): array => $chunk->first()['type'] === 'text'
+        ? ['type' => 'text', 'content' => $chunk->pluck('content')->implode('')]
+        : $chunk->first()
+    )
+    ->values()
+    ->all();
+```
+
 ## Red Flags
 - `foreach` loops that build a new array by appending (`$items[] = ...`)
 - Temporary array variables initialized as `[]` before a loop
@@ -174,6 +208,7 @@ $users->each(fn ($user) => $user->notify(new WelcomeNotification));
 - Nested `foreach` loops that flatten child collections
 - `each` with a `use (&$variable)` reference to collect results
 - Multiple sequential loops that could be a single chain
+- `foreach` loops that track a "previous" or "last" item to detect group boundaries
 
 ## Validation Questions for the Architect
 1. Are there `foreach` loops that could be replaced with `map`, `filter`, `pluck`, `reduce`, or `flatMap`?
@@ -181,3 +216,4 @@ $users->each(fn ($user) => $user->notify(new WelcomeNotification));
 3. Are collection chains readable as step-by-step descriptions of what the code does, or are they overly nested?
 4. Is `each` being misused for transformations where `map` would be appropriate?
 5. Are there loops exceeding ~10 lines that could be broken into a clear pipeline of named operations?
+6. Are there loops that group adjacent items sharing a condition, where `chunkWhile` would eliminate manual boundary tracking?
