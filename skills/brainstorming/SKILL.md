@@ -25,7 +25,7 @@ Turn rough ideas into a clear, beginner-friendly design document.
 
 1. Check the current git branch. If on `main` (or the default branch), create and switch to a feature branch named `feature/<short-topic>`. Ask the user to confirm the branch name.
 2. Explore project context (files, existing patterns, constraints).
-3. Clarify the idea through guided questions (see Questioning Standard below).
+3. Interview the user about every aspect of the idea (see Questioning Standard below). Do not move to step 4 until every branch of the design tree has a clear answer.
 4. Propose 2-3 implementation approaches with trade-offs.
 5. Recommend one approach and explain why it is best.
 6. Ask the user to approve the recommended approach.
@@ -35,12 +35,25 @@ Turn rough ideas into a clear, beginner-friendly design document.
 
 ## Questioning Standard
 
-Do not rapid-fire questions. The goal is to help the user think through their idea, not to interrogate them.
+Interview the user about every aspect of the idea until reaching a shared understanding. Be thorough — do not skip branches or accept vague answers. The goal is a complete picture before any design decisions are made.
 
-- Ask one question at a time.
-- If the user is unsure or gives a vague answer, help them explore the answer. Offer options, examples, or explain what the trade-offs are so they can decide.
+### Design-tree exploration
+
+Think of the idea as a tree. Each major aspect (who uses it, what it does, how it works, what happens at the edges) is a branch. Each branch has sub-branches (decisions that depend on other decisions).
+
+1. Identify the top-level branches of the design.
+2. Walk down one branch at a time. Ask about the most foundational decisions first — ones that other decisions depend on.
+3. When a decision on one branch affects another branch, call that out and resolve the dependency before moving on.
+4. After completing a branch, briefly summarize what was decided, then move to the next branch.
+5. When all branches are explored, summarize the full picture and confirm it with the user before proceeding.
+
+### Questioning rules
+
+- Ask one question at a time. Never stack multiple questions.
+- If the user is unsure or gives a vague answer, help them explore it. Offer 2-3 concrete options with trade-offs so they can pick.
 - Only move to the next question once the current one has a clear answer.
 - Use simple language and concrete examples when framing questions.
+- Be persistent — circle back to gaps or contradictions. Do not move to design proposals while open questions remain.
 
 ## Output Structure
 
