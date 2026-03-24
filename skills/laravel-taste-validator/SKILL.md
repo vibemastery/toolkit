@@ -33,12 +33,13 @@ Each principle has a dedicated reference file with validation criteria, code exa
 | 18 | [18-communicate-errors-to-users.md](references/18-communicate-errors-to-users.md) | Inline validation errors, flash for business errors, precise messages |
 | 19 | [19-errors-as-values.md](references/19-errors-as-values.md) | Result objects over exceptions for domain errors, visible failure paths |
 | 20 | [20-prefer-collection-pipelines-over-loops.md](references/20-prefer-collection-pipelines-over-loops.md) | Replace loops with `map`, `filter`, `reduce`, `pluck`, `flatMap`; chain operations |
+| 21 | [21-consolidate-tests-with-datasets.md](references/21-consolidate-tests-with-datasets.md) | Merge structurally identical tests into `->with()` datasets; named keys, when NOT to consolidate |
 
 ## Workflow
 
 ### Step 1: Identify which principles apply
 
-Based on the files or code shared by the user, identify which principles are relevant. You don't need to run all 14 for every review — select those applicable to the code at hand.
+Based on the files or code shared by the user, identify which principles are relevant. You don't need to run all 21 for every review — select those applicable to the code at hand.
 
 **Quick mapping:**
 - Controllers → principles 2, 12, 13, 17, 18, 20
@@ -46,7 +47,7 @@ Based on the files or code shared by the user, identify which principles are rel
 - Policies → principle 13
 - FormRequests → principles 2, 13, 15, 16
 - Routes → principles 1, 13
-- Tests → principle 14
+- Tests → principles 14, 21
 - Action classes → principles 7, 10, 16, 17, 19, 20
 - Service/utility classes → principles 4, 5, 6, 10, 11, 19, 20
 - Query scopes → principles 3, 9
@@ -108,6 +109,7 @@ After all principle reviews complete, present a structured report:
 - [ ] Do error messages tell the user how to fix the problem?
 - [ ] Am I throwing exceptions for normal domain outcomes instead of returning results?
 - [ ] Could this loop be a collection pipeline?
+- [ ] Are structurally identical tests consolidated into datasets?
 ```
 
 ## Scoped Reviews
@@ -119,8 +121,8 @@ For targeted reviews, load only the relevant principles:
 | "Review this controller" | 2, 12, 13, 17, 18, 20 |
 | "Review this model" | 1, 2, 5, 8, 9, 11, 20 |
 | "Review this service/action class" | 4, 5, 6, 7, 10, 16, 17, 19, 20 |
-| "Review my tests" | 14 |
+| "Review my tests" | 14, 21 |
 | "Review my routes/policies" | 1, 13 |
 | "Review my form requests" | 2, 13, 15, 16 |
 | "Review my exceptions/error handling" | 17, 18, 19 |
-| Full audit | All 20 |
+| Full audit | All 21 |
