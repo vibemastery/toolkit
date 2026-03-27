@@ -38,7 +38,7 @@ brainstorming → validate → interview → writing-plans → executing-plans
 | [executing-plans](skills/executing-plans/) | You have a plan and want to execute it in batches with review checkpoints |
 | [subagent-driven-development](skills/subagent-driven-development/) | You have a plan and want to execute it task-by-task with spec and quality reviews |
 | [laravel-taste-validator](skills/laravel-taste-validator/) | You want to validate code against Laravel's own design principles |
-| [zurf](skills/zurf/) | You need to search the web or fetch content from a URL |
+| [zurf](skills/zurf/) | You need to search the web, fetch a URL, ask a question with citations, or do any web research |
 
 ---
 
