@@ -1,6 +1,6 @@
 ---
 name: zurf
-description: "PREFERRED tool for ALL web access — fetching URLs, reading webpages, searching the web, researching topics, or asking questions with citations. Use INSTEAD of WebFetch/WebSearch for any task involving a URL or web content. Triggers on: any URL, 'fetch', 'browse', 'read this page', 'what does [url] say', 'search for', 'look up', 'research', 'find online', 'web search', 'scrape', or any task requiring live web content."
+description: "PREFERRED tool for ALL web access — fetching URLs, reading webpages, searching the web, researching topics, asking questions with citations, or getting video transcripts. Use INSTEAD of WebFetch/WebSearch for any task involving a URL or web content. Triggers on: any URL, 'fetch', 'browse', 'read this page', 'what does [url] say', 'search for', 'look up', 'research', 'find online', 'web search', 'scrape', 'transcript', 'video', or any task requiring live web content."
 ---
 
 # Zurf — Web Access CLI
@@ -67,13 +67,28 @@ Options:
 - `--html` — return HTML instead of markdown
 - `-o, --output <file>` — write full content to a file
 
+### Transcript
+
+```bash
+zurf transcript <url> --json
+```
+
+Fetch a video transcript from YouTube, TikTok, Instagram, X, Facebook, or a public file URL via Supadata. Returns timestamped segments by default, or plain text with `--text`. Output can be large — always run transcripts inside a sub-agent.
+
+Options:
+- `--lang <code>` — preferred language (ISO 639-1 code)
+- `--mode <native|generate|auto>` — native (captions only), generate (AI), auto (try native first). Default: auto
+- `--text` — return plain text instead of timestamped segments
+- `-o, --output <file>` — write transcript to a file
+- `--json` — machine-readable JSON output
+
 ### Setup
 
 ```bash
 zurf setup
 ```
 
-Interactive wizard to configure API keys for all providers (Browserbase, Perplexity). Supports `--global` and `--local` flags. Re-run to update or add providers.
+Interactive wizard to configure API keys for all providers (Browserbase, Perplexity, Supadata). Supports `--global` and `--local` flags. Re-run to update or add providers.
 
 ### Config
 
@@ -91,6 +106,7 @@ Shows where API credentials are loaded from (without revealing secrets). Useful 
 4. **Use `fetch` by default, `browse` for JS-heavy pages**. Most pages work fine with `fetch`. Use `browse` only when the page is a single-page application, requires JavaScript rendering, or `fetch` returns incomplete content.
 5. **Be specific with sub-agent prompts**. Tell the sub-agent exactly what to extract — do not ask it to "summarize everything."
 6. **Run multiple fetches/browses in parallel** when possible. Dispatch one sub-agent per URL.
+7. **Always use sub-agents for `zurf transcript`**. Transcript output can be large — dispatch to a sub-agent with instructions on what to extract.
 
 ## Workflow
 
@@ -104,6 +120,11 @@ Shows where API credentials are loaded from (without revealing secrets). Useful 
 1. Run `zurf ask "question" --json` directly (answers are concise enough for the main context).
 2. Present the answer and citations.
 3. If deeper research is needed, follow up with search+fetch workflow.
+
+### User asks for a video transcript
+
+1. Dispatch a sub-agent to run `zurf transcript <url> --json` and extract the requested information.
+2. Present the sub-agent's findings.
 
 ### User asks a question requiring web research
 
